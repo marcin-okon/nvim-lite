@@ -91,7 +91,7 @@ lualine.setup {
 		lualine_a = { branch, diff },
 		lualine_b = { mode },
 		lualine_c = {},
-		lualine_x = { diagnostic, "encoding", pyenv },
+		lualine_x = { diagnostic, "encoding", filetype, pyenv },
 		lualine_y = { progress },
 		lualine_z = { location }
 	},
