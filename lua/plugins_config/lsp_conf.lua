@@ -9,6 +9,8 @@ require('mason-lspconfig').setup({
 	}
 })
 
+local python = require("python_resolver")
+
 local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -46,6 +48,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 local lspconfig = require('lspconfig')
 local luasnip = require 'luasnip'
 local cmp = require 'cmp'
+
 
 cmp.setup {
 	snippet = {
@@ -110,6 +113,14 @@ cmp.setup.cmdline(':', {
 })
 
 lspconfig.pyright.setup {
+	before_init = function(_, config)
+		local python_path = python.get_python_executable()
+		if python_path then
+			config.settings = config.settings or {}
+			config.settings.python = config.settings.python or {}
+			config.settings.python.pythonPath = python_path
+		end
+	end,
 	on_attach = on_attach,
 	flags = {
 		debounce_text_changes = 150,

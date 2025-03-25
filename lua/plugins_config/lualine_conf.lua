@@ -1,4 +1,5 @@
 local lualine = require("lualine")
+local python = require("python_resolver")
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
@@ -27,6 +28,13 @@ local filename = {
 	"filename",
 	file_status = true,
 	path = 0
+}
+
+local pyenv = {
+	function()
+		local path = python.get_pyenv_env_name()
+		return "🐍 " .. vim.fn.fnamemodify(path, ":t")
+	end
 }
 
 
@@ -83,7 +91,7 @@ lualine.setup {
 		lualine_a = { branch, diff },
 		lualine_b = { mode },
 		lualine_c = {},
-		lualine_x = { diagnostic, "encoding", filetype },
+		lualine_x = { diagnostic, "encoding", pyenv },
 		lualine_y = { progress },
 		lualine_z = { location }
 	},
