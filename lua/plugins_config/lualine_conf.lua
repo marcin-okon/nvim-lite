@@ -34,6 +34,9 @@ local pyenv = {
 	function()
 		local path = python.get_pyenv_env_name()
 		return "🐍 " .. vim.fn.fnamemodify(path, ":t")
+	end,
+	cond = function()
+		return vim.bo.filetype == "python"
 	end
 }
 
@@ -68,6 +71,7 @@ local progress = {
 	end
 }
 
+
 lualine.setup {
 	options = {
 		icons_enabled = true,
@@ -91,15 +95,14 @@ lualine.setup {
 		lualine_a = { branch, diff },
 		lualine_b = { mode },
 		lualine_c = {},
-		lualine_x = { diagnostic, "encoding", filetype, pyenv },
+		lualine_x = { "diagnostic", "encoding", filetype, pyenv },
 		lualine_y = { progress },
 		lualine_z = { location }
 	},
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
-		lualine_c = { filename },
-		lualine_x = { location },
+		lualine_c = { location },
 		lualine_y = {},
 		lualine_z = {}
 	},

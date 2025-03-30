@@ -5,7 +5,7 @@ require('mason-lspconfig').setup({
 		"pyright",
 		"dockerls",
 		"taplo",
-		"tsserver"
+		"ts_ls"
 	}
 })
 
@@ -140,7 +140,7 @@ lspconfig.lua_ls.setup {
 	}
 }
 
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
 	on_attach = on_attach
 })
 
